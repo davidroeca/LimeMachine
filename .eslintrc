@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "plugin:react-native/all",
+    "plugin:flowtype/recommended"
+  ],
+  "plugins": [
+    "flowtype",
+    "react-native"
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "emcaFeatures": {
+      "jsx": true
+    }
+  }
+}
