@@ -6,9 +6,9 @@ player.
 
 ## Goals
 
-* Playlists can be imported and exported as *files*
-* Songs can be imported as *files*
-* Any operating system that sanely manages/tracks *files* should be supported
+* Playlists can be imported and exported as __files__
+* Songs can be imported as __files__
+* Any operating system that sanely manages/tracks __files__ should be supported
 * Future Goal: FLAC support on all systems (looking at you, iOS)
 
 ## Nice to have
