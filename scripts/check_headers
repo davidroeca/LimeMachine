@@ -1,0 +1,16 @@
+#!/bin/bash
+
+############################################################
+# Script to check that all files have license headers
+############################################################
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+DIR_PROJECT=$(dirname $DIR)
+for f in $(find $DIR_PROJECT/App -type f); do
+  curr=$(head -n 5 $f)
+  if [ ! -z $prev ] && [ $prev != $curr ]; then
+    echo "Diff of $f and $prevf"
+    diff <(echo $curr) <(echo $prev)
+  fi
+  prevf=$f
+done
