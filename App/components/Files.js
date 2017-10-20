@@ -10,14 +10,15 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { List, ListItem } from 'react-native-elements'
-import { readFs } from '../actions/files'
+import { setupFs, readFs } from '../actions/files'
 import { playFromFs } from '../actions/player'
 import stylesheet from '../stylesheet'
 
 class Files extends Component<{files: Array<Object>, dispatch: () => any}> {
 
   componentWillMount() {
-    this.props.dispatch(readFs(''))
+    const { dispatch } = this.props
+    dispatch(setupFs()).then(() => dispatch(readFs('')))
   }
 
   render() {
