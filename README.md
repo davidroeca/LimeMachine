@@ -1,7 +1,7 @@
 ## LimeMachine
 
 An app that *takes you back* to the days when music apps were simple. I plan
-to integrate it with Clementine (see the citrus theme?) as my desktop music
+to integrate it with Clementine (*another citrus fruit*) as my desktop music
 player.
 
 ## Goals
