@@ -69,6 +69,7 @@ export const readFs = (dir: string) => dispatch => {
     .then(
       () => RNFS.readDir(dirpath)
     )
+  // below is where to actually start
   //return RNFS.readDir(dirpath)
     .then(
       files => {

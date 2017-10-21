@@ -9,7 +9,7 @@
 
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import { List, ListItem } from 'react-native-elements'
+import { Badge, List, ListItem } from 'react-native-elements'
 import { setupFs, readFs } from '../actions/files'
 import { playFromFs } from '../actions/player'
 import stylesheet from '../stylesheet'
@@ -25,6 +25,10 @@ class Files extends Component<{files: Array<Object>, dispatch: () => any}> {
     const { files = [] } = this.props
     return (
       <View style={stylesheet.filesContainer}>
+        <View style={stylesheet.badgesTop}>
+          <Badge value="Select" />
+          <Badge value="Import" />
+        </View>
         <List containerStyle={stylesheet.filesList}>
           {
             files.map((file, key) => (

@@ -19,10 +19,16 @@ const stylesheet = StyleSheet.create({
   },
   filesContainer: {
     flex: 1,
-    alignItems: 'flex-start',
-    paddingTop: 2,
+    //paddingTop: 2,
+    alignItems: 'center',
+    //justifyContent: 'center',
+  },
+  badgesTop: {
+    flex: 1,
+    flexDirection: 'row',
   },
   filesList: {
+    flex: 20,
     width: '100%',
   },
   filesListItem: {
