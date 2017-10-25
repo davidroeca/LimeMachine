@@ -17,6 +17,7 @@ import {
   STOP,
   RESUME,
   PAUSE,
+  PLAYING_DONE,
   PLAYER_ERROR
 } from '../constants/actionTypes'
 
@@ -33,6 +34,10 @@ const playFromFsInternal = (filepath) => ({
 const startPlaying = (song) => ({
   type: START_PLAYING,
   song
+})
+
+const playingDone = () => ({
+  type: PLAYING_DONE
 })
 
 export const playFromFs = (filepath) => {
@@ -58,6 +63,7 @@ export const playFromFs = (filepath) => {
           if (!success) {
             throw new Error("Song didn't play")
           }
+          dispatch(playingDone())
         })
         dispatch(startPlaying(song))
         dispatch(NavigationActions.navigate({
@@ -112,6 +118,7 @@ export const resume = () => (dispatch, getState) => {
       if (!success) {
         dispatch(playerError('Song playback failed'))
       }
+      dispatch(playingDone())
     })
     dispatch(internalResume())
   }

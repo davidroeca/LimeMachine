@@ -13,6 +13,7 @@ import {
   STOP,
   PAUSE,
   RESUME,
+  PLAYING_DONE,
   READ_FS_DISCOVERED,
   READ_FS_FAIL,
   PLAYER_ERROR,
@@ -42,7 +43,12 @@ const files = (state = initialState, action) => {
       return {
         ...state,
         currentSong: action.song,
-        isPlaying: true
+        isPlaying: true,
+      }
+    case PLAYING_DONE:
+      return {
+        ...state,
+        isPlaying: false,
       }
     case PAUSE:
       return {

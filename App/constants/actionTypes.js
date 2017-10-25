@@ -13,6 +13,7 @@ export const START_PLAYING = 'START_PLAYING'
 export const STOP = 'STOP'
 export const PAUSE = 'PAUSE'
 export const RESUME = 'RESUME'
+export const PLAYING_DONE = 'PLAYING_DONE'
 
 // File action types
 export const SET_UP_FS_START = 'SET_UP_FS_START'

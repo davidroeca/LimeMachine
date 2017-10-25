@@ -57,14 +57,31 @@ const readFsDiscovered = (dir: string, files: Array<Object>) => ({
 export const readFs = (dir: string) => dispatch => {
   dispatch(readFsStart(dir))
 
-  const test_files = [
-    'test1',
-    'test2',
-    'test 3',
+  const test_mp3_urls = [
+    {
+      url: 'http://soundjig.com/pages/soundfx/beeps.php?mp3=beep1.mp3',
+      name: 'beep1.mp3',
+    },
+    {
+      url: 'http://soundjig.com/pages/soundfx/beeps.php?mp3=beep9.mp3',
+      name: 'beep9.mp3',
+    },
+    {
+      url: 'http://soundjig.com/pages/soundfx/beeps.php?mp3=beep16.mp3',
+      name: 'beep16.mp3',
+    }
   ]
   const dirpath = path.join(FILES_DIRPATH, dir)
-  return Promise.all(test_files.map(
-    file => RNFS.writeFile(path.join(dirpath, file), '')
+  return Promise.all(test_mp3_urls.map(
+    ({url, name}) => RNFS.downloadFile({
+      fromUrl: url,
+      toFile: path.join(dirpath, name)
+    }).promise // object also returned with jobId in case of cancels
+    .then(downloadResult => {
+      if (downloadResult.statusCode !== 200) {
+        throw new Error('Non-200 status code for file download')
+      }
+    })
   ))
     .then(
       () => RNFS.readDir(dirpath)
