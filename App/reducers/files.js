@@ -8,22 +8,14 @@
  */
 
 import {
-  PLAY_FROM_FS,
-  START_PLAYING,
-  STOP,
-  PAUSE,
-  RESUME,
-  PLAYING_DONE,
   READ_FS_DISCOVERED,
   READ_FS_FAIL,
-  PLAYER_ERROR,
 } from '../constants/actionTypes'
 
 const initialState = {
-  isPlaying: false,
-  currentSong: null,
-  error: null,
-  items: [],
+  files: [],
+  dir: null,
+  dirFailed: null
 }
 
 const files = (state = initialState, action) => {
@@ -38,38 +30,6 @@ const files = (state = initialState, action) => {
         ...state,
         files: action.files,
         dir: action.dir,
-      }
-    case START_PLAYING:
-      return {
-        ...state,
-        currentSong: action.song,
-        isPlaying: true,
-      }
-    case PLAYING_DONE:
-      return {
-        ...state,
-        isPlaying: false,
-      }
-    case PAUSE:
-      return {
-        ...state,
-        isPlaying: false,
-      }
-    case RESUME:
-      return {
-        ...state,
-        isPlaying: true,
-      }
-    case STOP:
-      return {
-        ...state,
-        isPlaying: false,
-        currentSong: null
-      }
-    case PLAYER_ERROR:
-      return {
-        ...state,
-        error: action.error
       }
     default:
       return state

@@ -3,16 +3,15 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  **********************************************************************
- * The Player connected component
+ * Selectors to allow for state restructuring with less refactoring.
+ * Will grow into subdirectory if app grows
  * @flow
  */
 
-import { connect } from 'react-redux'
-import { getPlayingState } from '../selectors'
-import Player from '../components/Player'
+export const getVisibleFiles = state => state.files.files
 
-const mapStateToProps = (state) => ({
-  isPlaying: getPlayingState(state),
-})
+export const getPlayingState = state => state.player.isPlaying
 
-export default connect(mapStateToProps)(Player)
+export const getCurrentSong = state => state.player.currentSong
+
+export const getPlayerError = state => state.player.error

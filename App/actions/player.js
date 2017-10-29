@@ -10,6 +10,7 @@ import RNFS from 'react-native-fs'
 import path from 'path-browserify'
 import Sound from 'react-native-sound'
 import { NavigationActions } from 'react-navigation'
+import { getCurrentSong } from '../selectors'
 import { PLAYER } from '../constants/navigation'
 import {
   PLAY_FROM_FS,
@@ -45,7 +46,7 @@ export const playFromFs = (filepath) => {
     dispatch(playFromFsInternal(filepath))
 
     const state = getState()
-    const oldSong = state.files.currentSong
+    const oldSong = getCurrentSong(state)
     if (oldSong) {
       oldSong.release()
     }
@@ -84,7 +85,7 @@ const stopInternal = () => ({
 export const stop = () => {
   return (dispatch, getState) => {
     const state = getState()
-    const oldSong = state.files.currentSong
+    const oldSong = getCurrentSong(state)
     if (oldSong) {
       oldSong.release()
     }
@@ -98,7 +99,7 @@ const internalPause = () => ({
 
 export const pause = () => (dispatch, getState) => {
   const state = getState()
-  const song = state.files.currentSong
+  const song = getCurrentSong(state)
   if (song) {
     song.pause(() => {
       dispatch(internalPause())
@@ -112,7 +113,7 @@ const internalResume = () => ({
 
 export const resume = () => (dispatch, getState) => {
   const state = getState()
-  const song = state.files.currentSong
+  const song = getCurrentSong(state)
   if (song) {
     song.play((success) => {
       if (!success) {

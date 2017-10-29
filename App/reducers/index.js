@@ -10,10 +10,12 @@
 import { combineReducers } from 'redux'
 import nav from './nav'
 import files from './files'
+import player from './player'
 
 const reducer = combineReducers({
   nav,
   files,
+  player,
 })
 
 export default reducer

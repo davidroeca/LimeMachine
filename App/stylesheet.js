@@ -51,15 +51,6 @@ const stylesheet = StyleSheet.create({
   playerButton: {
     flex: 1,
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-  },
 })
 
 export default stylesheet

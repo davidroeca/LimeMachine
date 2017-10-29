@@ -8,10 +8,11 @@
  */
 
 import { connect } from 'react-redux'
+import { getVisibleFiles } from '../selectors'
 import Files from '../components/Files'
 
 const mapStateToProps = (state) => ({
-  files: state.files.files,
+  files: getVisibleFiles(state),
 })
 
 export default connect(mapStateToProps)(Files)

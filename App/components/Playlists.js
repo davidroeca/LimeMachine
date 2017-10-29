@@ -7,7 +7,7 @@
  * @flow
  */
 
-import React, { Component } from 'react'
+import React from 'react'
 import { Text, View } from 'react-native'
 import { Button } from 'react-native-elements'
 import stylesheet from '../stylesheet'
@@ -15,12 +15,6 @@ import { stop } from '../actions/files'
 
 const Playlists = ({ error, debugtext, dispatch }) => (
   <View style={stylesheet.container}>
-    <Text style={stylesheet.welcome}>
-      Hello David
-    </Text>
-    <Text style={stylesheet.instructions}>
-      This is native code
-    </Text>
     <Button
       raised
       icon={{name: 'home', size: 32}}
