@@ -10,12 +10,15 @@
 import {
   READ_FS_DISCOVERED,
   READ_FS_FAIL,
+  TOGGLE_SELECT,
+  SELECT_FILE
 } from '../constants/actionTypes'
 
 const initialState = {
   files: [],
   dir: null,
-  dirFailed: null
+  dirFailed: null,
+  selecting: false,
 }
 
 const files = (state = initialState, action) => {
@@ -28,8 +31,34 @@ const files = (state = initialState, action) => {
     case READ_FS_DISCOVERED:
       return {
         ...state,
-        files: action.files,
+        files: action.files.map(info => ({
+          checked: false,
+          info
+        })),
         dir: action.dir,
+      }
+    case TOGGLE_SELECT:
+      return {
+        ...state,
+        selecting: !state.selecting,
+      }
+    case SELECT_FILE:
+      if (state.files[action.index] != null) {
+        const toUpdate = state.files[action.index]
+        const updated = {
+          ...toUpdate,
+          checked: !toUpdate.checked
+        }
+        return {
+          ...state,
+          files: [
+            ...state.files.slice(0, action.index),
+            updated,
+            ...state.files.slice(action.index + 1)
+          ]
+        }
+      } else {
+        return state
       }
     default:
       return state

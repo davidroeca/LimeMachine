@@ -9,12 +9,16 @@
 
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import { Badge, List, ListItem } from 'react-native-elements'
-import { setupFs, readFs } from '../actions/files'
+import { Badge, CheckBox, List, ListItem } from 'react-native-elements'
+import { setupFs, readFs, toggleSelect, selectFile } from '../actions/files'
 import { playFromFs } from '../actions/player'
 import stylesheet from '../stylesheet'
 
-class Files extends Component<{files: Array<Object>, dispatch: () => any}> {
+class Files extends Component<{
+  files: Array<Object>,
+  selecting: bool,
+  dispatch: () => any
+}> {
 
   componentWillMount() {
     const { dispatch } = this.props
@@ -22,27 +26,38 @@ class Files extends Component<{files: Array<Object>, dispatch: () => any}> {
   }
 
   render() {
-    const { files = [] } = this.props
+    const { files = [], dispatch, selecting } = this.props
     return (
       <View style={stylesheet.filesContainer}>
         <View style={stylesheet.badgesTop}>
-          <Badge value="Select" />
+          <Badge value="Select" onPress={() => dispatch(toggleSelect())} />
           <Badge value="Import" />
         </View>
         <List containerStyle={stylesheet.filesList}>
           {
-            files.map((file, key) => (
-              <ListItem
-                hideChevron
-                onPress={() => this.props.dispatch(playFromFs(file.path))}
-                containerStyle={stylesheet.filesListItem}
-                key={key}
-                leftIcon={{
-                  name: file.isDirectory() ? 'folder' : 'music-note'
-                }}
-                title={file.name}
-              />
-            ))
+            files.map((file, index) => {
+              const onPress = selecting ?
+                () => dispatch(selectFile(index)) :
+                () => dispatch(playFromFs(file.info.path))
+              const leftIcon = selecting ? (
+                <CheckBox
+                  checked={file.checked}
+                  onIconPress={() => dispatch(selectFile(index))}
+                />
+              ) : {
+                name: file.info.isDirectory() ? 'folder' : 'music-note'
+              }
+              return (
+                <ListItem
+                  hideChevron
+                  onPress={onPress}
+                  containerStyle={stylesheet.filesListItem}
+                  key={index}
+                  leftIcon={leftIcon}
+                  title={file.info.name}
+                />
+              )
+            })
           }
         </List>
       </View>

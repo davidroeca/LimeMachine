@@ -15,7 +15,10 @@ import {
   READ_FS_FAIL,
   SET_UP_FS_START,
   SET_UP_FS_SUCCESS,
-  SET_UP_FS_FAIL
+  SET_UP_FS_FAIL,
+  TOGGLE_SELECT,
+  SELECT_FILE,
+  SELECT_ALL
 } from '../constants/actionTypes'
 
 // dir in this whole module is relative to documents dir
@@ -95,3 +98,16 @@ export const readFs = (dir: string) => dispatch => {
     )
     .catch(() => dispatch(readFsFail(dir)))
 }
+
+export const toggleSelect = () => ({
+  type: TOGGLE_SELECT,
+})
+
+export const selectFile = (index) => ({
+  type: SELECT_FILE,
+  index,
+})
+
+export const selectAll = () => ({
+  type: SELECT_ALL,
+})

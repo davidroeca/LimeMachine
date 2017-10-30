@@ -8,8 +8,13 @@
  * @flow
  */
 
+
+// Files selectors
 export const getVisibleFiles = state => state.files.files
 
+export const getFilesSelecting = state => state.files.selecting
+
+// Player selectors
 export const getPlayingState = state => state.player.isPlaying
 
 export const getCurrentSong = state => state.player.currentSong
