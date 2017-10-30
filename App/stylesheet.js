@@ -51,6 +51,11 @@ const stylesheet = StyleSheet.create({
   playerButton: {
     flex: 1,
   },
+  library: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 })
 
 export default stylesheet

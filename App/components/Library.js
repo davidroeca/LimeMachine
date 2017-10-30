@@ -3,12 +3,22 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  **********************************************************************
- * Constants associated with react-navigation
+ * The Library Page component
  * @flow
  */
 
-export const HOME = 'Home'
-export const PLAYER = 'Player'
-export const FILES = 'Files'
-export const PLAYLISTS = 'Playlists'
-export const LIBRARY = 'Library'
+import React, { Component } from 'react'
+import stylesheet from '../stylesheet'
+import { View, Text } from 'react-native'
+
+class Library extends Component {
+  render() {
+    return (
+      <View style={stylesheet.library}>
+        <Text>Coming soon...</Text>
+      </View>
+    )
+  }
+}
+
+export default Library

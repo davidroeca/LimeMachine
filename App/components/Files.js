@@ -31,7 +31,11 @@ class Files extends Component<{
       <View style={stylesheet.filesContainer}>
         <View style={stylesheet.badgesTop}>
           <Badge value="Select" onPress={() => dispatch(toggleSelect())} />
-          <Badge value="Import" />
+          {
+            selecting ?
+              <Badge value="Import" /> :
+              null
+          }
         </View>
         <List containerStyle={stylesheet.filesList}>
           {

@@ -11,10 +11,11 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { TabNavigator } from 'react-navigation'
-import { PLAYLISTS, FILES } from '../constants/navigation'
+import { PLAYLISTS, FILES, LIBRARY } from '../constants/navigation'
 import TabBarIcon from './TabBarIcon'
 import Files from '../containers/Files'
 import Playlists from '../containers/Playlists'
+import Library from './Library'
 
 const HomeNavigator = TabNavigator({
   [FILES]: {
@@ -30,6 +31,14 @@ const HomeNavigator = TabNavigator({
     navigationOptions: {
       tabBarLabel: 'Playlist',
       tabBarIcon: (<TabBarIcon name='list-alt'/>),
+      showIcon: true,
+    }
+  },
+  [LIBRARY]: {
+    screen: Library,
+    navigationOptions: {
+      tabBarLabel: 'Library',
+      tabBarIcon: (<TabBarIcon name='book'/>),
       showIcon: true,
     }
   },
