@@ -3,23 +3,18 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  **********************************************************************
- * Database schemas, part of realm database
+ * Export the realm object
  * @flow
  */
+import {
+  SONG,
+  PLAYLIST,
+  ARTIST,
+  ALBUM,
+  GENRE,
+} from '../constants/realm'
 
-/**********************************************************
- * Constants used within this file
- **********************************************************/
-const SONG = 'Song'
-const PLAYLIST = 'Playlist'
-const ARTIST = 'Artist'
-const ALBUM = 'Album'
-const GENRE = 'Genre'
-
-/**********************************************************
- * Exported schemas; use their 'name' prop externally
- **********************************************************/
-export const SongSchema = {
+const SongSchema = {
   name: SONG,
   primaryKey: 'id',
   properties: {
@@ -63,7 +58,7 @@ export const SongSchema = {
   }
 }
 
-export const AlbumSchema = {
+const AlbumSchema = {
   name: ALBUM,
   primaryKey: 'id',
   properties: {
@@ -87,7 +82,7 @@ export const AlbumSchema = {
   }
 }
 
-export const ArtistSchema = {
+const ArtistSchema = {
   name: ARTIST,
   primaryKey: 'id',
   properties: {
@@ -111,7 +106,7 @@ export const ArtistSchema = {
   }
 }
 
-export const GenreSchema = {
+const GenreSchema = {
   name: GENRE,
   primaryKey: 'id',
   properties: {
@@ -123,7 +118,7 @@ export const GenreSchema = {
   }
 }
 
-export const PlaylistSchema = {
+const PlaylistSchema = {
   name: PLAYLIST,
   primaryKey: 'id',
   properties: {
@@ -139,3 +134,13 @@ export const PlaylistSchema = {
     },
   }
 }
+
+export default new Realm({
+  schema: [
+    SongSchema,
+    AlbumSchema,
+    ArtistSchema,
+    GenreSchema,
+    PlaylistSchema,
+  ]
+})
