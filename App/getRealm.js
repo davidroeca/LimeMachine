@@ -3,7 +3,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  **********************************************************************
- * Export the realm object
+ * Export a function that opens realm with the promise API
  * @flow
  */
 import Realm from 'realm'
@@ -136,7 +136,7 @@ const PlaylistSchema = {
   }
 }
 
-export default new Realm({
+export default () => Realm.open({
   schema: [
     SongSchema,
     AlbumSchema,
