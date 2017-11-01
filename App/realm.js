@@ -6,6 +6,7 @@
  * Export the realm object
  * @flow
  */
+import Realm from 'realm'
 import {
   SONG,
   PLAYLIST,
