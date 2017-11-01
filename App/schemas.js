@@ -19,28 +19,80 @@ const GENRE = 'Genre'
 /**********************************************************
  * Exported schemas; use their 'name' prop externally
  **********************************************************/
-
-export const ArtistSchema = {
-  name: ARTIST,
+export const SongSchema = {
+  name: SONG,
   properties: {
-    name: 'string',
-    songs: {
-      type: 'list',
-      objectType: SONG,
-      default: []
+    name: {
+      type: 'string',
     },
-    albums: {
-      type: 'list',
-      objectType: ALBUM,
-      default: [],
+    filetype: {
+      type: 'string',
     },
+    filepath: {
+      type: 'string',
+    },
+    artist: {
+      type: ARTIST,
+    },
+    albumArtist: {
+      type: ARTIST,
+    }
+    album: {
+      type: ALBUM,
+    },
+    genre: {
+      type: GENRE,
+    },
+    track: {
+      type: 'int',
+      optional: true,
+    },
+    disk: {
+      type: 'int',
+      optional: true,
+    },
+    playCount: {
+      type: 'int',
+      default: 0,
+    }
   }
 }
 
 export const AlbumSchema = {
   name: ALBUM,
   properties: {
-    name: 'string'
+    name: {
+      type: 'string'
+    }
+    songs: {
+      type: 'linkingObject',
+      objectType: SONG,
+      property: 'album',
+    }
+    artists: {
+      type: 'linkingObject',
+      objectType: SONG,
+      property: 'albumArtist',
+    }
+  }
+}
+
+export const ArtistSchema = {
+  name: ARTIST,
+  properties: {
+    name: {
+      type: 'string'
+    },
+    songs: {
+      type: 'linkingObject',
+      objectType: SONG,
+      property: 'artist',
+    },
+    albums: {
+      type: 'linkingObject',
+      objectType: SONG,
+      property: 'albumArtist',
+    },
   }
 }
 
@@ -51,27 +103,15 @@ export const GenreSchema = {
   }
 }
 
-export const SongSchema = {
-  name: SONG,
-  properties: {
-    filetype: 'string',
-    filepath: 'string',
-    artist: {
-      type: 'linkingObjects',
-      objectType: ARTIST,
-      property: 'songs'
-    },
-    genre: {
-      type: 'list',
-      objectType: GENRE,
-    }
-  }
-}
-
 export const PlaylistSchema = {
   name: PLAYLIST,
   properties: {
-    name: { type: 'string' },
-    songs: { type: 'list', objectType: SONG },
+    name: {
+      type: 'string'
+    },
+    songs: {
+      type: 'list',
+      objectType: SONG
+    },
   }
 }
