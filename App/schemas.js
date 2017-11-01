@@ -91,7 +91,7 @@ export const ArtistSchema = {
     albums: {
       type: 'linkingObject',
       objectType: SONG,
-      property: 'albumArtist',
+      property: 'album',
     },
   }
 }
