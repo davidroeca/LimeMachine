@@ -21,9 +21,14 @@ const GENRE = 'Genre'
  **********************************************************/
 export const SongSchema = {
   name: SONG,
+  primaryKey: 'id',
   properties: {
+    id: {
+      type: 'string',
+    },
     name: {
       type: 'string',
+      indexed: true,
     },
     filetype: {
       type: 'string',
@@ -60,9 +65,14 @@ export const SongSchema = {
 
 export const AlbumSchema = {
   name: ALBUM,
+  primaryKey: 'id',
   properties: {
+    id: {
+      type: 'string',
+    },
     name: {
-      type: 'string'
+      type: 'string',
+      indexed: true,
     }
     songs: {
       type: 'linkingObject',
@@ -79,9 +89,14 @@ export const AlbumSchema = {
 
 export const ArtistSchema = {
   name: ARTIST,
+  primaryKey: 'id',
   properties: {
+    id: {
+      type: 'string',
+    },
     name: {
-      type: 'string'
+      type: 'string',
+      indexed: true,
     },
     songs: {
       type: 'linkingObject',
@@ -98,14 +113,23 @@ export const ArtistSchema = {
 
 export const GenreSchema = {
   name: GENRE,
+  primaryKey: 'id',
   properties: {
+    id: {
+      type: 'string',
+    },
     name: 'string',
+    indexed: true,
   }
 }
 
 export const PlaylistSchema = {
   name: PLAYLIST,
+  primaryKey: 'id',
   properties: {
+    id: {
+      type: 'string',
+    },
     name: {
       type: 'string'
     },
