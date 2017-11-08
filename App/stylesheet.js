@@ -53,8 +53,14 @@ const stylesheet = StyleSheet.create({
   },
   library: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+  },
+  libraryList: {
+    flex: 20,
+    width: '100%',
+  },
+  libraryListItem: {
+    width: '100%',
   }
 })
 

@@ -13,7 +13,7 @@ import {
   ARTIST,
   ALBUM,
   GENRE,
-} from '../constants/realm'
+} from './constants/realm'
 
 const SongSchema = {
   name: SONG,
@@ -22,27 +22,32 @@ const SongSchema = {
     id: {
       type: 'string',
     },
-    name: {
-      type: 'string',
-      indexed: true,
-    },
-    filetype: {
+    extension: {
       type: 'string',
     },
     filepath: {
       type: 'string',
     },
+    name: {
+      type: 'string',
+      indexed: true,
+      optional: true,
+    },
     artist: {
       type: ARTIST,
+      optional: true,
     },
     albumArtist: {
       type: ARTIST,
-    }
+      optional: true,
+    },
     album: {
       type: ALBUM,
+      optional: true,
     },
     genre: {
       type: GENRE,
+      optional: true,
     },
     track: {
       type: 'int',
@@ -69,12 +74,12 @@ const AlbumSchema = {
     name: {
       type: 'string',
       indexed: true,
-    }
+    },
     songs: {
       type: 'linkingObject',
       objectType: SONG,
       property: 'album',
-    }
+    },
     artists: {
       type: 'linkingObject',
       objectType: SONG,

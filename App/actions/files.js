@@ -6,6 +6,7 @@
  * The actions related to files
  * @flow
  */
+import uuid from 'uuid'
 import RNFS from 'react-native-fs'
 import path from 'path-browserify'
 import { FILES_DIRPATH } from '../constants/files'
@@ -18,8 +19,14 @@ import {
   SET_UP_FS_FAIL,
   TOGGLE_SELECT,
   SELECT_FILE,
-  SELECT_ALL
+  SELECT_ALL,
+  IMPORT_SONGS_START,
+  IMPORT_SONGS_SUCCESS,
+  IMPORT_SONGS_FAIL
 } from '../constants/actionTypes'
+import getRealm from '../getRealm'
+import { getSelectedFiles } from '../selectors'
+import { SONG } from '../constants/realm'
 
 // dir in this whole module is relative to documents dir
 const setupFsStart = () => ({
@@ -111,3 +118,34 @@ export const selectFile = (index) => ({
 export const selectAll = () => ({
   type: SELECT_ALL,
 })
+
+const importSongsStart = () => ({
+  type: IMPORT_SONGS_START,
+})
+
+const importSongsSuccess = () => ({
+  type: IMPORT_SONGS_SUCCESS,
+})
+
+const importSongsFail = () => ({
+  type: IMPORT_SONGS_FAIL,
+})
+
+export const importSongs = () => (dispatch, getState) => {
+  dispatch(importSongsStart())
+  const state = getState()
+  const selectedFileInfo = getSelectedFiles(state).map(file => file.info)
+  getRealm()
+    .then(realm => {
+      realm.write(() => {
+        for (const info of selectedFileInfo) {
+          realm.create(SONG, {
+            id: uuid.v4(),
+            extension: path.extname(info.filename),
+            filepath: info.path,
+          })
+        }
+      })
+    })
+    .catch((error) => dispatch(importSongsFail()))
+}

@@ -12,6 +12,10 @@
 // Files selectors
 export const getVisibleFiles = state => state.files.files
 
+export const getSelectedFiles = state => (
+  getVisibleFiles(state).filter(file => file.checked)
+)
+
 export const getFilesSelecting = state => state.files.selecting
 
 // Player selectors
@@ -20,3 +24,6 @@ export const getPlayingState = state => state.player.isPlaying
 export const getCurrentSong = state => state.player.currentSong
 
 export const getPlayerError = state => state.player.error
+
+// Library selectors
+export const getSongsInView = state => state.library.songs

@@ -15,7 +15,7 @@ import { PLAYLISTS, FILES, LIBRARY } from '../constants/navigation'
 import TabBarIcon from './TabBarIcon'
 import Files from '../containers/Files'
 import Playlists from '../containers/Playlists'
-import Library from './Library'
+import Library from '../containers/Library'
 
 const HomeNavigator = TabNavigator({
   [FILES]: {
