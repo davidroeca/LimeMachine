@@ -14,7 +14,10 @@ const initialState = {
   songs: []
 }
 
-const library = (state = initialState, action) => {
+const library = (
+  state: Object = initialState,
+  action: Object
+) => {
   switch(action.type) {
     case GET_SONG_DATA_SUCCESS:
       return {

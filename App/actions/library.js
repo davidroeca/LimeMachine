@@ -28,7 +28,9 @@ const getSongDataSuccess = (songs) => ({
   songs,
 })
 
-export const getSongData = () => dispatch => {
+export const getSongData = () => (
+  dispatch: (any) => any
+) => {
   dispatch(getSongDataStart())
   getRealm()
     .then(realm => {

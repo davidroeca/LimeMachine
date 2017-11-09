@@ -13,7 +13,10 @@ import { Button }  from 'react-native-elements'
 import stylesheet from '../stylesheet'
 import { pause, resume } from '../actions/player'
 
-class Player extends Component<{dispatch: () => any, isPlaying: boolean}> {
+class Player extends Component<{
+  dispatch: (any) => any,
+  isPlaying: boolean
+}> {
   render() {
     const { dispatch, isPlaying } = this.props
     const iconType = 'font-awesome'

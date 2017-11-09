@@ -41,7 +41,7 @@ const setupFsFail = () => ({
   type: SET_UP_FS_FAIL,
 })
 
-export const setupFs = () => dispatch => {
+export const setupFs = () => (dispatch: (any) => any) => {
   dispatch(setupFsStart())
   return RNFS.mkdir(FILES_DIRPATH)
     .then(() => dispatch(setupFsSuccess()))
@@ -64,7 +64,7 @@ const readFsDiscovered = (dir: string, files: Array<Object>) => ({
   files,
 })
 
-export const readFs = (dir: string) => dispatch => {
+export const readFs = (dir: string) => (dispatch: (any) => any) => {
   dispatch(readFsStart(dir))
 
   const test_mp3_urls = [
@@ -110,7 +110,7 @@ export const toggleSelect = () => ({
   type: TOGGLE_SELECT,
 })
 
-export const selectFile = (index) => ({
+export const selectFile = (index: number) => ({
   type: SELECT_FILE,
   index,
 })
@@ -131,7 +131,10 @@ const importSongsFail = () => ({
   type: IMPORT_SONGS_FAIL,
 })
 
-export const importSongs = () => (dispatch, getState) => {
+export const importSongs = () => (
+  dispatch: (any) => any,
+  getState: () => Object,
+) => {
   dispatch(importSongsStart())
   const state = getState()
   const selectedFileInfo = getSelectedFiles(state).map(file => file.info)

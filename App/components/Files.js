@@ -23,7 +23,7 @@ import stylesheet from '../stylesheet'
 class Files extends Component<{
   files: Array<Object>,
   selecting: boolean,
-  dispatch: () => any
+  dispatch: (any) => any
 }> {
 
   componentWillMount() {

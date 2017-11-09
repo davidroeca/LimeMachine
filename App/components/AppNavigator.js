@@ -16,8 +16,7 @@ import { HOME, PLAYER } from '../constants/navigation'
 const AppNavigator = StackNavigator({
   [HOME]: { screen: Home },
   [PLAYER]: { screen: Player },
-}, {
-  //headerMode: 'none'
 })
 
+// $FlowFixMe
 export default AppNavigator

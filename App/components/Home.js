@@ -18,6 +18,9 @@ import Playlists from '../containers/Playlists'
 import Library from '../containers/Library'
 import TabBarIcon from './TabBarIcon'
 
+const COLOR_MAGENTA = '#E91E63'
+
+
 const HomeNavigator = TabNavigator({
   [FILES]: {
     screen: Files,
@@ -46,7 +49,7 @@ const HomeNavigator = TabNavigator({
 }, {
   tabBarPosition: 'bottom',
   tabBarOptions: {
-    activeTintColor: '#e91e63',
+    activeTintColor: COLOR_MAGENTA,
   }
 })
 
@@ -57,6 +60,7 @@ class Home extends Component<{}> {
   render() {
     return (
       <View style={stylesheet.home}>
+        {/* $FlowFixMe */}
         <HomeNavigator />
       </View>
     )

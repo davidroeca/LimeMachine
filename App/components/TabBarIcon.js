@@ -10,18 +10,20 @@
 import React, { Component } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-const TabBarIcon = ({
-  name,
-  color = 'black'
-}: {
+class TabBarIcon extends Component<{
   name: string,
-  color: ?string
-}) => (
-  <Icon
-    size={30}
-    name={name}
-    color={color}
-  />
-)
+  color?: string
+}> {
+  render() {
+    const { name, color = 'black' } = this.props
+    return (
+      <Icon
+        size={30}
+        name={name}
+        color={color}
+      />
+    )
+  }
+}
 
 export default TabBarIcon

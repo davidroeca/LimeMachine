@@ -11,14 +11,15 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { List, ListItem } from 'react-native-elements'
 import path from 'path-browserify'
+import Sound from 'react-native-sound'
 import { getSongData } from '../actions/library'
 import { playFromFs } from '../actions/player'
 
 import stylesheet from '../stylesheet'
 
 class Library extends Component<{
-  songs: Array,
-  dispatch: () => any
+  songs: [Sound],
+  dispatch: (any) => any
 }> {
   componentWillMount() {
     const { dispatch } = this.props

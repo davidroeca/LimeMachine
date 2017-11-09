@@ -7,25 +7,34 @@
  * @flow
  */
 
-import React from 'react'
+import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { Button } from 'react-native-elements'
 import stylesheet from '../stylesheet'
-import { stop } from '../actions/files'
+import { stop } from '../actions/player'
 
-const Playlists = ({ error, debugtext, dispatch }) => (
-  <View style={stylesheet.container}>
-    <Button
-      raised
-      icon={{name: 'home', size: 32}}
-      buttonStyle={stylesheet.playlistButton}
-      textStyle={stylesheet.playlistText}
-      title='Stop'
-      onPress={() => dispatch(stop())}
-    />
-    <Text>{error ? error : ''}</Text>
-    <Text>{debugtext}</Text>
-  </View>
-)
+class Playlists extends Component<{
+  error: string,
+  debugtext: string,
+  dispatch: (any) => any
+}> {
+  render() {
+    const { error, debugtext, dispatch } = this.props
+    return (
+      <View style={stylesheet.container}>
+        <Button
+          raised
+          icon={{name: 'home', size: 32}}
+          buttonStyle={stylesheet.playlistButton}
+          textStyle={stylesheet.playlistText}
+          title='Stop'
+          onPress={() => dispatch(stop())}
+        />
+        <Text>{error ? error : ''}</Text>
+        <Text>{debugtext}</Text>
+      </View>
+    )
+  }
+}
 
 export default Playlists

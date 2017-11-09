@@ -16,6 +16,11 @@
 ; Ignore polyfills
 .*/Libraries/polyfills/.*
 
+; ignore broken types
+.*/node_modules/react-native-side-menu/.*
+.*/node_modules/react-native-tab-view/.*
+.*/node_modules/lib-rn/.*
+
 [include]
 
 [libs]

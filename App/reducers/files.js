@@ -22,7 +22,10 @@ const initialState = {
   selecting: false,
 }
 
-const files = (state = initialState, action) => {
+const files = (
+  state: Object = initialState,
+  action: Object
+) => {
   switch(action.type) {
     case READ_FS_FAIL:
       return {
