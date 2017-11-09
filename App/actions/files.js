@@ -82,7 +82,7 @@ export const readFs = (dir: string) => (dispatch: (any) => any) => {
     }
   ]
   const dirpath = path.join(FILES_DIRPATH, dir)
-  return Promise.all(test_mp3_urls.map(
+  Promise.all(test_mp3_urls.map(
     ({url, name}) => RNFS.downloadFile({
       fromUrl: url,
       toFile: path.join(dirpath, name)

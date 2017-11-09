@@ -10,6 +10,7 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
+// $FlowFixMe
 import { TabNavigator } from 'react-navigation'
 import { PLAYLISTS, FILES, LIBRARY } from '../constants/navigation'
 import stylesheet from '../stylesheet'
@@ -60,7 +61,6 @@ class Home extends Component<{}> {
   render() {
     return (
       <View style={stylesheet.home}>
-        {/* $FlowFixMe */}
         <HomeNavigator />
       </View>
     )

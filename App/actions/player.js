@@ -9,6 +9,7 @@
 import RNFS from 'react-native-fs'
 import path from 'path-browserify'
 import Sound from 'react-native-sound'
+// $FlowFixMe
 import { NavigationActions } from 'react-navigation'
 import { getCurrentSong } from '../selectors'
 import { PLAYER } from '../constants/navigation'

@@ -9,6 +9,7 @@
 
 import React, { Component } from 'react'
 
+// $FlowFixMe
 import { addNavigationHelpers } from 'react-navigation'
 import AppNavigator from './AppNavigator'
 
@@ -18,7 +19,7 @@ class App extends Component<{
 }> {
   render() {
     const { dispatch, nav } = this.props
-    return (  // $FlowFixMe
+    return (
       <AppNavigator
         navigation={addNavigationHelpers({
           dispatch: dispatch,
