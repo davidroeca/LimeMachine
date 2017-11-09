@@ -13,7 +13,7 @@ import {
   GET_SONG_DATA_FAIL,
   GET_SONG_DATA_SUCCESS
 } from '../constants/actionTypes'
-import { SONG } from '../constants/realm'
+import { REALM_SONG } from '../constants/realm'
 
 const getSongDataStart = () => ({
   type: GET_SONG_DATA_START,
@@ -32,7 +32,7 @@ export const getSongData = () => dispatch => {
   dispatch(getSongDataStart())
   getRealm()
     .then(realm => {
-      const songs = realm.objects(SONG).slice(0, 100)
+      const songs = realm.objects(REALM_SONG).slice(0, 100)
       dispatch(getSongDataSuccess(songs))
     })
     .catch((error) => dispatch(getSongDataFail()))

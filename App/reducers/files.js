@@ -11,6 +11,7 @@ import {
   READ_FS_DISCOVERED,
   READ_FS_FAIL,
   TOGGLE_SELECT,
+  IMPORT_SONGS_SUCCESS,
   SELECT_FILE
 } from '../constants/actionTypes'
 
@@ -59,6 +60,11 @@ const files = (state = initialState, action) => {
         }
       } else {
         return state
+      }
+    case IMPORT_SONGS_SUCCESS:
+      return {
+        ...state,
+        importSongSuccess: true,
       }
     default:
       return state

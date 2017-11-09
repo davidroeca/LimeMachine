@@ -12,10 +12,11 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { TabNavigator } from 'react-navigation'
 import { PLAYLISTS, FILES, LIBRARY } from '../constants/navigation'
-import TabBarIcon from './TabBarIcon'
+import stylesheet from '../stylesheet'
 import Files from '../containers/Files'
 import Playlists from '../containers/Playlists'
 import Library from '../containers/Library'
+import TabBarIcon from './TabBarIcon'
 
 const HomeNavigator = TabNavigator({
   [FILES]: {
@@ -55,7 +56,7 @@ class Home extends Component<{}> {
   }
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={stylesheet.home}>
         <HomeNavigator />
       </View>
     )

@@ -18,8 +18,8 @@ const Playlists = ({ error, debugtext, dispatch }) => (
     <Button
       raised
       icon={{name: 'home', size: 32}}
-      buttonStyle={{backgroundColor: 'red', borderRadius: 10}}
-      textStyle={{textAlign: 'center'}}
+      buttonStyle={stylesheet.playlistButton}
+      textStyle={stylesheet.playlistText}
       title='Stop'
       onPress={() => dispatch(stop())}
     />

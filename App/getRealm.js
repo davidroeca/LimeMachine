@@ -8,15 +8,15 @@
  */
 import Realm from 'realm'
 import {
-  SONG,
-  PLAYLIST,
-  ARTIST,
-  ALBUM,
-  GENRE,
+  REALM_SONG,
+  REALM_PLAYLIST,
+  REALM_ARTIST,
+  REALM_ALBUM,
+  REALM_GENRE,
 } from './constants/realm'
 
 const SongSchema = {
-  name: SONG,
+  name: REALM_SONG,
   primaryKey: 'id',
   properties: {
     id: {
@@ -34,19 +34,19 @@ const SongSchema = {
       optional: true,
     },
     artist: {
-      type: ARTIST,
+      type: REALM_ARTIST,
       optional: true,
     },
     albumArtist: {
-      type: ARTIST,
+      type: REALM_ARTIST,
       optional: true,
     },
     album: {
-      type: ALBUM,
+      type: REALM_ALBUM,
       optional: true,
     },
     genre: {
-      type: GENRE,
+      type: REALM_GENRE,
       optional: true,
     },
     track: {
@@ -65,7 +65,7 @@ const SongSchema = {
 }
 
 const AlbumSchema = {
-  name: ALBUM,
+  name: REALM_ALBUM,
   primaryKey: 'id',
   properties: {
     id: {
@@ -77,19 +77,19 @@ const AlbumSchema = {
     },
     songs: {
       type: 'linkingObject',
-      objectType: SONG,
+      objectType: REALM_SONG,
       property: 'album',
     },
     artists: {
       type: 'linkingObject',
-      objectType: SONG,
+      objectType: REALM_SONG,
       property: 'albumArtist',
     }
   }
 }
 
 const ArtistSchema = {
-  name: ARTIST,
+  name: REALM_ARTIST,
   primaryKey: 'id',
   properties: {
     id: {
@@ -101,19 +101,19 @@ const ArtistSchema = {
     },
     songs: {
       type: 'linkingObject',
-      objectType: SONG,
+      objectType: REALM_SONG,
       property: 'artist',
     },
     albums: {
       type: 'linkingObject',
-      objectType: SONG,
+      objectType: REALM_SONG,
       property: 'album',
     },
   }
 }
 
 const GenreSchema = {
-  name: GENRE,
+  name: REALM_GENRE,
   primaryKey: 'id',
   properties: {
     id: {
@@ -125,7 +125,7 @@ const GenreSchema = {
 }
 
 const PlaylistSchema = {
-  name: PLAYLIST,
+  name: REALM_PLAYLIST,
   primaryKey: 'id',
   properties: {
     id: {
@@ -136,7 +136,7 @@ const PlaylistSchema = {
     },
     songs: {
       type: 'list',
-      objectType: SONG
+      objectType: REALM_SONG
     },
   }
 }

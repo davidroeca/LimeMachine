@@ -26,7 +26,7 @@ import {
 } from '../constants/actionTypes'
 import getRealm from '../getRealm'
 import { getSelectedFiles } from '../selectors'
-import { SONG } from '../constants/realm'
+import { REALM_SONG } from '../constants/realm'
 
 // dir in this whole module is relative to documents dir
 const setupFsStart = () => ({
@@ -139,13 +139,14 @@ export const importSongs = () => (dispatch, getState) => {
     .then(realm => {
       realm.write(() => {
         for (const info of selectedFileInfo) {
-          realm.create(SONG, {
+          realm.create(REALM_SONG, {
             id: uuid.v4(),
             extension: path.extname(info.filename),
             filepath: info.path,
           })
         }
       })
+      dispatch(importSongsSuccess())
     })
     .catch((error) => dispatch(importSongsFail()))
 }
