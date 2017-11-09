@@ -7,7 +7,7 @@
 		"test": "jest"
 	},
 	"dependencies": {
-		"flow-bin": "0.53",
+		"flow-bin": "^0.59.0",
 		"path-browserify": "^0.0.0",
 		"react": "16.0.0-beta.5",
 		"react-native": "0.49.3",
