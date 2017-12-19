@@ -15,7 +15,7 @@ import {
   REALM_GENRE,
 } from './constants/realm'
 
-const SongSchema = {
+export const SongSchema = {
   name: REALM_SONG,
   primaryKey: 'id',
   properties: {
@@ -64,7 +64,7 @@ const SongSchema = {
   }
 }
 
-const AlbumSchema = {
+export const AlbumSchema = {
   name: REALM_ALBUM,
   primaryKey: 'id',
   properties: {
@@ -76,19 +76,14 @@ const AlbumSchema = {
       indexed: true,
     },
     songs: {
-      type: 'linkingObject',
+      type: 'linkingObjects',
       objectType: REALM_SONG,
       property: 'album',
     },
-    artists: {
-      type: 'linkingObject',
-      objectType: REALM_SONG,
-      property: 'albumArtist',
-    }
   }
 }
 
-const ArtistSchema = {
+export const ArtistSchema = {
   name: REALM_ARTIST,
   primaryKey: 'id',
   properties: {
@@ -100,31 +95,28 @@ const ArtistSchema = {
       indexed: true,
     },
     songs: {
-      type: 'linkingObject',
+      type: 'linkingObjects',
       objectType: REALM_SONG,
       property: 'artist',
-    },
-    albums: {
-      type: 'linkingObject',
-      objectType: REALM_SONG,
-      property: 'album',
     },
   }
 }
 
-const GenreSchema = {
+export const GenreSchema = {
   name: REALM_GENRE,
   primaryKey: 'id',
   properties: {
     id: {
       type: 'string',
     },
-    name: 'string',
-    indexed: true,
+    name: {
+      type: 'string',
+      indexed: true,
+    }
   }
 }
 
-const PlaylistSchema = {
+export const PlaylistSchema = {
   name: REALM_PLAYLIST,
   primaryKey: 'id',
   properties: {
@@ -141,7 +133,7 @@ const PlaylistSchema = {
   }
 }
 
-export default () => Realm.open({
+export default getRealm = () => Realm.open({
   schema: [
     SongSchema,
     AlbumSchema,

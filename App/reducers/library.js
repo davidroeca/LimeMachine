@@ -7,7 +7,8 @@
  * @flow
  */
 import {
-  GET_SONG_DATA_SUCCESS
+  GET_SONG_DATA_SUCCESS,
+  GET_SONG_DATA_FAIL,
 } from '../constants/actionTypes'
 
 const initialState = {
@@ -23,6 +24,11 @@ const library = (
       return {
         ...state,
         songs: action.songs,
+      }
+    case GET_SONG_DATA_FAIL:
+      return {
+        ...state,
+        failure: true,
       }
     default:
       return state

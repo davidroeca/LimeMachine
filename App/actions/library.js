@@ -7,6 +7,7 @@
  * @flow
  */
 
+import Realm from 'realm'
 import getRealm from '../getRealm'
 import {
   GET_SONG_DATA_START,
@@ -37,5 +38,7 @@ export const getSongData = () => (
       const songs = realm.objects(REALM_SONG).slice(0, 100)
       dispatch(getSongDataSuccess(songs))
     })
-    .catch((error) => dispatch(getSongDataFail()))
+    .catch((error) => {
+      dispatch(getSongDataFail())
+    })
 }

@@ -151,5 +151,7 @@ export const importSongs = () => (
       })
       dispatch(importSongsSuccess())
     })
-    .catch((error) => dispatch(importSongsFail()))
+    .catch((error) => {
+      dispatch(importSongsFail())
+    })
 }

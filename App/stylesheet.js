@@ -69,6 +69,9 @@ const stylesheet = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  libraryButton: {
+    flex: 20,
+  },
   libraryList: {
     flex: 20,
     width: '100%',

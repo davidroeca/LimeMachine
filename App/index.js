@@ -16,12 +16,15 @@ import App from './containers/App'
 
 // -------------------------------------------
 // v Delete these lines when app is stable
-//import getRealm from './getRealm'
-//getRealm().then(realm => {
-  //if (!realm.empty) {
-    //realm.deleteAll()
-  //}
-//})
+import getRealm from './getRealm'
+getRealm()
+  .then(realm => {
+    realm.write(() => {
+      if (!realm.empty) {
+        realm.deleteAll()
+      }
+    })
+  })
 // ^ Delete these lines when app is stable
 // -------------------------------------------
 

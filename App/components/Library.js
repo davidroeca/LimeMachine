@@ -9,7 +9,7 @@
 
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import { List, ListItem } from 'react-native-elements'
+import { List, ListItem, Button } from 'react-native-elements'
 import path from 'path-browserify'
 import Sound from 'react-native-sound'
 import { getSongData } from '../actions/library'
@@ -21,14 +21,20 @@ class Library extends Component<{
   songs: [Sound],
   dispatch: (any) => any
 }> {
-  componentWillMount() {
+  componentDidMount() {
     const { dispatch } = this.props
     dispatch(getSongData())
   }
   render() {
+    const iconType = 'font-awesome'
     const { songs, dispatch } = this.props
     return (
       <View style={stylesheet.library}>
+        <Button
+          containerViewStyle={stylesheet.libraryButton}
+          icon={{name: 'refresh', type: iconType}}
+          onPress={() => dispatch(getSongData())}
+        />
         <List containerStyle={stylesheet.libraryList}>
           {
             songs.map((song, index) => {
