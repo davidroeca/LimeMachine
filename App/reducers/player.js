@@ -23,7 +23,7 @@ const initialState = {
   currentSong: null,
 }
 
-const player = (state = initialState, action) => {
+const player = (state: Object = initialState, action: Object) => {
   switch(action.type) {
     case START_PLAYING:
       return {

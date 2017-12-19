@@ -3,21 +3,16 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  **********************************************************************
- * The top-level reducer
+ * The Library connected component
  * @flow
  */
 
-import { combineReducers } from 'redux'
-import nav from './nav'
-import files from './files'
-import player from './player'
-import library from './library'
+import { connect } from 'react-redux'
+import { getSongsInView } from '../selectors'
+import Library from '../components/Library'
 
-const reducer = combineReducers({
-  nav,
-  files,
-  player,
-  library,
+const mapStateToProps = (state) => ({
+  songs: getSongsInView(state)
 })
 
-export default reducer
+export default connect(mapStateToProps)(Library)

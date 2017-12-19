@@ -20,6 +20,7 @@ export const PLAYER_ERROR = 'PLAYER_ERROR'
 export const SET_UP_FS_START = 'SET_UP_FS_START'
 export const SET_UP_FS_SUCCESS = 'SET_UP_FS_SUCCESS'
 export const SET_UP_FS_FAIL = 'SET_UP_FS_FAIL'
+
 export const READ_FS_START = 'READ_FS_START'
 export const READ_FS_DISCOVERED = 'READ_FS_DISCOVERED'
 export const READ_FS_FAIL = 'READ_FS_FAIL'
@@ -27,3 +28,12 @@ export const READ_FS_FAIL = 'READ_FS_FAIL'
 export const TOGGLE_SELECT = 'TOGGLE_SELECT'
 export const SELECT_FILE = 'SELECT_FILE'
 export const SELECT_ALL = 'SELECT_ALL'
+
+export const IMPORT_SONGS_START = 'IMPORT_SONGS_START'
+export const IMPORT_SONGS_SUCCESS = 'IMPORT_SONGS_SUCCESS'
+export const IMPORT_SONGS_FAIL = 'IMPORT_SONGS_FAIL'
+
+// Library Action types
+export const GET_SONG_DATA_START = 'GET_SONG_DATA_START'
+export const GET_SONG_DATA_FAIL = 'GET_SONG_DATA_FAIL'
+export const GET_SONG_DATA_SUCCESS = 'GET_SONG_DATA_SUCCESS'

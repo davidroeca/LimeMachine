@@ -14,7 +14,7 @@ const initialState = AppNavigator.router.getStateForAction(
   AppNavigator.router.getActionForPathAndParams(HOME)
 )
 
-const nav = (state = initialState, action) => {
+const nav = (state: Object = initialState, action: Object) => {
   const nextState = AppNavigator.router.getStateForAction(action, state)
   return nextState || state
 }

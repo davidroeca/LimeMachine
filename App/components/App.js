@@ -9,16 +9,25 @@
 
 import React, { Component } from 'react'
 
+// $FlowFixMe
 import { addNavigationHelpers } from 'react-navigation'
 import AppNavigator from './AppNavigator'
 
-const App = ({ dispatch, nav }) => (
-  <AppNavigator
-    navigation={addNavigationHelpers({
-      dispatch: dispatch,
-      state: nav
-    })}
-  />
-)
+class App extends Component<{
+  dispatch: (any) => any,
+  nav: Object
+}> {
+  render() {
+    const { dispatch, nav } = this.props
+    return (
+      <AppNavigator
+        navigation={addNavigationHelpers({
+          dispatch: dispatch,
+          state: nav
+        })}
+      />
+    )
+  }
+}
 
 export default App

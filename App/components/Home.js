@@ -10,12 +10,17 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
+// $FlowFixMe
 import { TabNavigator } from 'react-navigation'
 import { PLAYLISTS, FILES, LIBRARY } from '../constants/navigation'
-import TabBarIcon from './TabBarIcon'
+import stylesheet from '../stylesheet'
 import Files from '../containers/Files'
 import Playlists from '../containers/Playlists'
-import Library from './Library'
+import Library from '../containers/Library'
+import TabBarIcon from './TabBarIcon'
+
+const COLOR_MAGENTA = '#E91E63'
+
 
 const HomeNavigator = TabNavigator({
   [FILES]: {
@@ -45,7 +50,7 @@ const HomeNavigator = TabNavigator({
 }, {
   tabBarPosition: 'bottom',
   tabBarOptions: {
-    activeTintColor: '#e91e63',
+    activeTintColor: COLOR_MAGENTA,
   }
 })
 
@@ -55,7 +60,7 @@ class Home extends Component<{}> {
   }
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={stylesheet.home}>
         <HomeNavigator />
       </View>
     )

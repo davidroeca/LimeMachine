@@ -8,6 +8,7 @@
  */
 
 import React, { Component } from 'react'
+// $FlowFixMe
 import { StackNavigator } from 'react-navigation'
 import Home from './Home'
 import Player from '../containers/Player'
@@ -16,8 +17,6 @@ import { HOME, PLAYER } from '../constants/navigation'
 const AppNavigator = StackNavigator({
   [HOME]: { screen: Home },
   [PLAYER]: { screen: Player },
-}, {
-  //headerMode: 'none'
 })
 
 export default AppNavigator

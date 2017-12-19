@@ -9,13 +9,20 @@
 
 import { StyleSheet } from 'react-native'
 
+const COLOR_RED = '#FF3000'
+const COLOR_BLUE_WHITE = '#F5FCFF'
+const COLOR_V_LIGHT_GREY = '#F2F2F2'
+
 const stylesheet = StyleSheet.create({
+  home: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     paddingTop: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: COLOR_BLUE_WHITE,
   },
   filesContainer: {
     flex: 1,
@@ -34,6 +41,13 @@ const stylesheet = StyleSheet.create({
   filesListItem: {
     width: '100%',
   },
+  playlistButton: {
+    backgroundColor: COLOR_RED,
+    borderRadius: 10,
+  },
+  playlistText: {
+    textAlign: 'center'
+  },
   playerContainer: {
     flex: 1,
     //flexDirection: 'row',
@@ -41,7 +55,7 @@ const stylesheet = StyleSheet.create({
   playerArt: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#F2F2F2',
+    backgroundColor: COLOR_V_LIGHT_GREY,
     justifyContent: 'center',
   },
   playerButtons: {
@@ -53,8 +67,17 @@ const stylesheet = StyleSheet.create({
   },
   library: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+  },
+  libraryButton: {
+    flex: 20,
+  },
+  libraryList: {
+    flex: 20,
+    width: '100%',
+  },
+  libraryListItem: {
+    width: '100%',
   }
 })
 

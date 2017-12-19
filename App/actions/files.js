@@ -6,6 +6,7 @@
  * The actions related to files
  * @flow
  */
+import uuid from 'uuid'
 import RNFS from 'react-native-fs'
 import path from 'path-browserify'
 import { FILES_DIRPATH } from '../constants/files'
@@ -18,8 +19,14 @@ import {
   SET_UP_FS_FAIL,
   TOGGLE_SELECT,
   SELECT_FILE,
-  SELECT_ALL
+  SELECT_ALL,
+  IMPORT_SONGS_START,
+  IMPORT_SONGS_SUCCESS,
+  IMPORT_SONGS_FAIL
 } from '../constants/actionTypes'
+import getRealm from '../getRealm'
+import { getSelectedFiles } from '../selectors'
+import { REALM_SONG } from '../constants/realm'
 
 // dir in this whole module is relative to documents dir
 const setupFsStart = () => ({
@@ -34,7 +41,7 @@ const setupFsFail = () => ({
   type: SET_UP_FS_FAIL,
 })
 
-export const setupFs = () => dispatch => {
+export const setupFs = () => (dispatch: (any) => any) => {
   dispatch(setupFsStart())
   return RNFS.mkdir(FILES_DIRPATH)
     .then(() => dispatch(setupFsSuccess()))
@@ -57,7 +64,7 @@ const readFsDiscovered = (dir: string, files: Array<Object>) => ({
   files,
 })
 
-export const readFs = (dir: string) => dispatch => {
+export const readFs = (dir: string) => (dispatch: (any) => any) => {
   dispatch(readFsStart(dir))
 
   const test_mp3_urls = [
@@ -75,7 +82,7 @@ export const readFs = (dir: string) => dispatch => {
     }
   ]
   const dirpath = path.join(FILES_DIRPATH, dir)
-  return Promise.all(test_mp3_urls.map(
+  Promise.all(test_mp3_urls.map(
     ({url, name}) => RNFS.downloadFile({
       fromUrl: url,
       toFile: path.join(dirpath, name)
@@ -103,7 +110,7 @@ export const toggleSelect = () => ({
   type: TOGGLE_SELECT,
 })
 
-export const selectFile = (index) => ({
+export const selectFile = (index: number) => ({
   type: SELECT_FILE,
   index,
 })
@@ -111,3 +118,40 @@ export const selectFile = (index) => ({
 export const selectAll = () => ({
   type: SELECT_ALL,
 })
+
+const importSongsStart = () => ({
+  type: IMPORT_SONGS_START,
+})
+
+const importSongsSuccess = () => ({
+  type: IMPORT_SONGS_SUCCESS,
+})
+
+const importSongsFail = () => ({
+  type: IMPORT_SONGS_FAIL,
+})
+
+export const importSongs = () => (
+  dispatch: (any) => any,
+  getState: () => Object,
+) => {
+  dispatch(importSongsStart())
+  const state = getState()
+  const selectedFileInfo = getSelectedFiles(state).map(file => file.info)
+  getRealm()
+    .then(realm => {
+      realm.write(() => {
+        for (const info of selectedFileInfo) {
+          realm.create(REALM_SONG, {
+            id: uuid.v4(),
+            extension: path.extname(info.filename),
+            filepath: info.path,
+          })
+        }
+      })
+      dispatch(importSongsSuccess())
+    })
+    .catch((error) => {
+      dispatch(importSongsFail())
+    })
+}

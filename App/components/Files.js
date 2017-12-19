@@ -10,14 +10,20 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Badge, CheckBox, List, ListItem } from 'react-native-elements'
-import { setupFs, readFs, toggleSelect, selectFile } from '../actions/files'
+import {
+  setupFs,
+  readFs,
+  toggleSelect,
+  selectFile,
+  importSongs
+} from '../actions/files'
 import { playFromFs } from '../actions/player'
 import stylesheet from '../stylesheet'
 
 class Files extends Component<{
   files: Array<Object>,
-  selecting: bool,
-  dispatch: () => any
+  selecting: boolean,
+  dispatch: (any) => any
 }> {
 
   componentWillMount() {
@@ -33,7 +39,10 @@ class Files extends Component<{
           <Badge value="Select" onPress={() => dispatch(toggleSelect())} />
           {
             selecting ?
-              <Badge value="Import" /> :
+              <Badge
+                value="Import"
+                onPress={() => dispatch(importSongs())}
+              /> :
               null
           }
         </View>

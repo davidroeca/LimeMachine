@@ -14,6 +14,20 @@ import thunk from 'redux-thunk'
 import reducer from './reducers'
 import App from './containers/App'
 
+// -------------------------------------------
+// v Delete these lines when app is stable
+import getRealm from './getRealm'
+getRealm()
+  .then(realm => {
+    realm.write(() => {
+      if (!realm.empty) {
+        realm.deleteAll()
+      }
+    })
+  })
+// ^ Delete these lines when app is stable
+// -------------------------------------------
+
 const store = createStore(
   reducer,
   applyMiddleware(thunk)

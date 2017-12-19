@@ -8,41 +8,46 @@
  */
 import Realm from 'realm'
 import {
-  SONG,
-  PLAYLIST,
-  ARTIST,
-  ALBUM,
-  GENRE,
-} from '../constants/realm'
+  REALM_SONG,
+  REALM_PLAYLIST,
+  REALM_ARTIST,
+  REALM_ALBUM,
+  REALM_GENRE,
+} from './constants/realm'
 
-const SongSchema = {
-  name: SONG,
+export const SongSchema = {
+  name: REALM_SONG,
   primaryKey: 'id',
   properties: {
     id: {
       type: 'string',
     },
-    name: {
-      type: 'string',
-      indexed: true,
-    },
-    filetype: {
+    extension: {
       type: 'string',
     },
     filepath: {
       type: 'string',
     },
+    name: {
+      type: 'string',
+      indexed: true,
+      optional: true,
+    },
     artist: {
-      type: ARTIST,
+      type: REALM_ARTIST,
+      optional: true,
     },
     albumArtist: {
-      type: ARTIST,
-    }
+      type: REALM_ARTIST,
+      optional: true,
+    },
     album: {
-      type: ALBUM,
+      type: REALM_ALBUM,
+      optional: true,
     },
     genre: {
-      type: GENRE,
+      type: REALM_GENRE,
+      optional: true,
     },
     track: {
       type: 'int',
@@ -59,8 +64,8 @@ const SongSchema = {
   }
 }
 
-const AlbumSchema = {
-  name: ALBUM,
+export const AlbumSchema = {
+  name: REALM_ALBUM,
   primaryKey: 'id',
   properties: {
     id: {
@@ -69,22 +74,17 @@ const AlbumSchema = {
     name: {
       type: 'string',
       indexed: true,
-    }
+    },
     songs: {
-      type: 'linkingObject',
-      objectType: SONG,
+      type: 'linkingObjects',
+      objectType: REALM_SONG,
       property: 'album',
-    }
-    artists: {
-      type: 'linkingObject',
-      objectType: SONG,
-      property: 'albumArtist',
-    }
+    },
   }
 }
 
-const ArtistSchema = {
-  name: ARTIST,
+export const ArtistSchema = {
+  name: REALM_ARTIST,
   primaryKey: 'id',
   properties: {
     id: {
@@ -95,32 +95,29 @@ const ArtistSchema = {
       indexed: true,
     },
     songs: {
-      type: 'linkingObject',
-      objectType: SONG,
+      type: 'linkingObjects',
+      objectType: REALM_SONG,
       property: 'artist',
     },
-    albums: {
-      type: 'linkingObject',
-      objectType: SONG,
-      property: 'album',
-    },
   }
 }
 
-const GenreSchema = {
-  name: GENRE,
+export const GenreSchema = {
+  name: REALM_GENRE,
   primaryKey: 'id',
   properties: {
     id: {
       type: 'string',
     },
-    name: 'string',
-    indexed: true,
+    name: {
+      type: 'string',
+      indexed: true,
+    }
   }
 }
 
-const PlaylistSchema = {
-  name: PLAYLIST,
+export const PlaylistSchema = {
+  name: REALM_PLAYLIST,
   primaryKey: 'id',
   properties: {
     id: {
@@ -131,12 +128,12 @@ const PlaylistSchema = {
     },
     songs: {
       type: 'list',
-      objectType: SONG
+      objectType: REALM_SONG
     },
   }
 }
 
-export default () => Realm.open({
+export default getRealm = () => Realm.open({
   schema: [
     SongSchema,
     AlbumSchema,
