@@ -176,7 +176,7 @@ export const importSongs = () => (
             let metadata = {
               artist: tags.artist,
               album: tags.album,
-              name: tags.name,
+              name: tags.title,
               albumArtist: null,
               genre: tags.genre,
             }
@@ -216,7 +216,7 @@ export const importSongs = () => (
                 const albumFilter = metadata.albumArtist ?
                   `artist.name == "${metadata.albumArtist}"` : 'artist == nil'
                 const albums = realm.objects(REALM_ALBUM)
-                  .filtered(`name == "${metadata.album} AND ${albumFilter}`)
+                  .filtered(`name == "${metadata.album}" AND ${albumFilter}`)
                 const album = albums.length ?
                   realm.create(REALM_ALBUM, {
                     id: uuid.v4(),
