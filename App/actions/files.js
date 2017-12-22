@@ -9,7 +9,15 @@
 import uuid from 'uuid'
 import RNFS from 'react-native-fs'
 import path from 'path-browserify'
+import jsmediatags from 'jsmediatags'
+import ReactNativeFileReader from 'jsmediatags/build2/ReactNativeFileReader'
 import { FILES_DIRPATH } from '../constants/files'
+import {
+  REALM_ARTIST,
+  REALM_GENRE,
+  REALM_ALBUM,
+  REALM_SONG,
+} from '../constants/realm'
 import {
   READ_FS_START,
   READ_FS_DISCOVERED,
@@ -26,7 +34,6 @@ import {
 } from '../constants/actionTypes'
 import getRealm from '../getRealm'
 import { getSelectedFiles } from '../selectors'
-import { REALM_SONG } from '../constants/realm'
 
 // dir in this whole module is relative to documents dir
 const setupFsStart = () => ({
@@ -140,18 +147,111 @@ export const importSongs = () => (
   const selectedFileInfo = getSelectedFiles(state).map(file => file.info)
   getRealm()
     .then(realm => {
-      realm.write(() => {
-        for (const info of selectedFileInfo) {
-          realm.create(REALM_SONG, {
-            id: uuid.v4(),
-            extension: path.extname(info.filename),
-            filepath: info.path,
-          })
+      for (const info of selectedFileInfo) {
+        let songObject = {
+          id: uuid.v4(),
+          extension: path.extname(info.filename),
+          filepath: info.path,
+          name: null,
+          artist: null,
+          albumArtist: null,
+          album: null,
+          genre: null,
         }
+        new Promise((resolve, reject) => {
+          new jsmediatags.Reader(info.path)
+            .setFileReader(ReactNativeFileReader)
+            .read({
+              onSuccess: (tag) => {
+                resolve(tag)
+              },
+              onError: (error) => {
+                reject(error)
+              },
+            })
+        })
+          .then(tagInfo => {
+            console.log(tagInfo)
+            const tags = tagInfo.tags
+            let metadata = {
+              artist: tags.artist,
+              album: tags.album,
+              name: tags.name,
+              albumArtist: null,
+              genre: tags.genre,
+            }
+            // Handlel tagtype-specific logic
+            switch(tagInfo.type) {
+              case 'ID3':
+                if (tags.TPE2) {
+                  metadata.albumArtist = tags.TPE2.data
+                }
+                break
+              default:
+                break
+            }
+            console.log(metadata)
+            realm.write(() => {
+              if (metadata.artist) {
+                const artists = realm.objects(REALM_ARTIST)
+                  .filtered(`name == "${metadata.artist}"`)
+                const artist = artists.length ?
+                  realm.create(REALM_ARTIST, {
+                    id: uuid.v4(),
+                    name: metadata.artist,
+                  }) : artists[0]
+                songObject.artist = artist
+              }
+              if (metadata.albumArtist) {
+                const albumArtists = realm.objects(REALM_ARTIST)
+                  .filtered(`name = "${metadata.albumArtist}"`)
+                const albumArtist = albumArtists.length ?
+                  realm.create(REALM_ARTIST, {
+                    id: uuid.v4(),
+                    name: metadata.albumArtist,
+                  }) : albumArtists[0]
+                songObject.albumArtist = albumArtist
+              }
+              if (metadata.album) {
+                const albumFilter = metadata.albumArtist ?
+                  `artist.name == "${metadata.albumArtist}"` : 'artist == nil'
+                const albums = realm.objects(REALM_ALBUM)
+                  .filtered(`name == "${metadata.album} AND ${albumFilter}`)
+                const album = albums.length ?
+                  realm.create(REALM_ALBUM, {
+                    id: uuid.v4(),
+                    name: metadata.album,
+                  }) : albums[0]
+                songObject.album = album
+              }
+              if (metadata.genre) {
+                const genres = realm.objects(REALM_GENRE)
+                  .filtered(`name == "${metadata.genre}"`)
+                const genre = genres.length ?
+                  realm.create(REALM_GENRE, {
+                    id: uuid.v4(),
+                    name: metadata.genre,
+                  }) : genres[0]
+                songObject.genre = genre
+              }
+              if (metadata.name) {
+                songObject.name = metadata.name
+              }
+              realm.create(REALM_SONG, songObject)
+            })
+          })
+          .catch(err => {
+            console.log(err)
+            realm.write(() => {
+              realm.create(REALM_SONG, songObject)
+            })
+          })
+      }
+    })
+      .then(() => {
+        dispatch(importSongsSuccess())
       })
-      dispatch(importSongsSuccess())
-    })
-    .catch((error) => {
-      dispatch(importSongsFail())
-    })
+      .catch((error) => {
+        dispatch(importSongsFail())
+      })
 }

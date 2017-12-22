@@ -7,7 +7,6 @@
  * @flow
  */
 
-import Realm from 'realm'
 import getRealm from '../getRealm'
 import {
   GET_SONG_DATA_START,

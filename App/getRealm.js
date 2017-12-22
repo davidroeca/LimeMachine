@@ -37,10 +37,6 @@ export const SongSchema = {
       type: REALM_ARTIST,
       optional: true,
     },
-    albumArtist: {
-      type: REALM_ARTIST,
-      optional: true,
-    },
     album: {
       type: REALM_ALBUM,
       optional: true,
@@ -75,6 +71,10 @@ export const AlbumSchema = {
       type: 'string',
       indexed: true,
     },
+    artist: {
+      type: REALM_ARTIST,
+      optional: true,
+    },
     songs: {
       type: 'linkingObjects',
       objectType: REALM_SONG,
@@ -93,6 +93,11 @@ export const ArtistSchema = {
     name: {
       type: 'string',
       indexed: true,
+    },
+    albums: {
+      type: 'linkingObjects',
+      objectType: REALM_ALBUM,
+      property: 'artist',
     },
     songs: {
       type: 'linkingObjects',
@@ -133,7 +138,7 @@ export const PlaylistSchema = {
   }
 }
 
-export default getRealm = () => Realm.open({
+export default () => Realm.open({
   schema: [
     SongSchema,
     AlbumSchema,
