@@ -8,8 +8,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "buffer": "^5.0.8",
     "flow": "^0.2.3",
     "flow-bin": "^0.57.0",
+    "jsmediatags": "^3.8.1",
     "path-browserify": "^0.0.0",
     "react": "16.0.0",
     "react-native": "0.51.0",
